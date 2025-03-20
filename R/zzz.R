@@ -10,12 +10,12 @@
     warning("showtext package is not installed. Unicode fonts may not render correctly.")
     return()
   }
-  
+
   showtext::showtext_auto()
-  
-  if (!"Noto Sans Math" %in% names(sysfonts::font_families())) {
-    sysfonts::font_add_google("Noto Sans Math", "noto")
-  }
+
+  # if (!"Noto Sans Math" %in% names(sysfonts::font_families())) {
+  #   sysfonts::font_add_google("Noto Sans Math", "noto")
+  # }
 }
 
 
