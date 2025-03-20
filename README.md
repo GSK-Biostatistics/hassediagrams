@@ -3,7 +3,7 @@ structure of experimental designs
 ================
 Damianos Michaelides, Simon Bate, Marion Chatfield
 
-# Overview
+## Overview
 
 The `hassediagram` package provides tools to visualize the **structure
 of experimental designs** using Hasse diagrams. The package determines
@@ -20,16 +20,16 @@ identify the terms to include in the statistical model.
 The package is an implementation of the methodology described in Bate
 and Chatfield (2016a and 2016b).
 
-Bate ST, Chatfield MJ (2016a). “Identifying the structure of the
+Bate S.T., Chatfield M.J. (2016a). “Identifying the structure of the
 experimental design.” Journal of Quality Technology, 48(4), 343–364.
 
-Bate ST, Chatfield MJ (2016b). “Using the structure of the experimental
-design and the randomization to construct a mixed model.” Journal of
-Quality Technology, 48(4), 365–387.
+Bate S.T., Chatfield M.J. (2016b). “Using the structure of the
+experimental design and the randomization to construct a mixed model.”
+Journal of Quality Technology, 48(4), 365–387.
 
-# Features
+## Features
 
-## Functions
+### Functions
 
 `hasselayout()`
 
@@ -49,9 +49,9 @@ the function are the `rls` object, generated using the itemlist()
 function, an object that defines the randomisation objects and an object
 that defines the randomisation arrows.
 
-# Installation
+## Installation
 
-## Install from GitHub (Development Version)
+### Install from GitHub (Development Version)
 
 The development version of `hassediagram` can be installed with:
 
@@ -63,13 +63,13 @@ install.packages("devtools")
 devtools::install_github("GSK-Biostatistics/hassediagram")
 ```
 
-## Install from CRAN (when made available)
+### Install from CRAN (when made available)
 
 ``` r
 install.packages("hassediagram")
 ```
 
-# Usage
+## Usage
 
 Load the package:
 
@@ -77,32 +77,40 @@ Load the package:
 library(hassediagram)
 ```
 
-# Example: Generate Hasse Diagras of the Layout Structure and Restricted Layout Structure
+## Example: Generate Hasse Diagrams of the Layout Structure and Restricted Layout Structure
 
-## A fractional factorial design for investigating asphalt concrete production
+### A fractional factorial design for investigating asphalt concrete production
 
-### Generate the Hasse diagram of the layout structure
+#### Generate the Hasse diagram of the layout structure
 
-hasselayout(datadesign=concrete, larger.fontlabelmultiplier=1.6,
-smaller.fontlabelmultiplier=1.3, table.out=“Y”)
+``` r
+hasselayout(datadesign=concrete, larger.fontlabelmultiplier=1.6, 
+            smaller.fontlabelmultiplier=1.3, table.out="Y")
+```
 
-### Generate objects required to create the Hasse diagram of the restricted layout structure
+#### Generate objects required to create the Hasse diagram of the restricted layout structure
 
-concrete_objects \<- itemlist(datadesign=concrete)
+``` r
+concrete_objects <- itemlist(datadesign=concrete) 
+```
 
-### Define the names of the randomisation objects corresponding to the structural objects
+#### Define the names of the randomisation objects corresponding to the structural objects
 
-concrete_rls \<- concrete_objects\$TransferObject concrete_rls\[,2\] \<-
-concrete_rls\[,1\] concrete_rls\[27,2\] \<-
-c(“AC<sup>AG</sup>CC<sup>CoT</sup>CuT 192 Run”)
+``` r
+concrete_rls <- concrete_objects$TransferObject 
+concrete_rls[,2] <- concrete_rls[,1]
+concrete_rls[27,2] <- c("AC^AG^CC^CoT^CuT \u2192 Run")
+```
 
 ### Generate the Hasse diagram of the restricted layout structure
 
-hasserls(object=concrete_objects, randomisation.objects=concrete_rls,
-larger.fontlabelmultiplier=1.6, smaller.fontlabelmultiplier=1.3,
-table.out=“Y”, arrow.pos=8)
+``` r
+hasserls(object=concrete_objects, randomisation.objects=concrete_rls, 
+         larger.fontlabelmultiplier=1.6, smaller.fontlabelmultiplier=1.3, 
+         table.out="Y", arrow.pos=8)
+```
 
-# Documentation
+## Documentation
 
 For an introduction to the methodology, check the package vignette:
 
@@ -112,3 +120,11 @@ vignette("Introduction_to_hassediagram")
 
 and for an introduction to the package implementation visit the
 documentation.
+
+## Maintenance
+
+This package is in a stable state and will only be updated for bug
+fixes.
+
+For feedback or suggestions, or to report bugs, contact
+<simon.t.bate@gsk.com>.

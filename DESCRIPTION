@@ -13,14 +13,15 @@ Description: Returns a Hasse diagram of the 'layout structure'
 	     design. 
 License: GPL-2
 Encoding: UTF-8
-Imports: igraph, methods, MASS, grDevices, graphics, stats
+URL: https://github.com/GSK-Biostatistics/hassediagram
+BugReports: https://github.com/GSK-Biostatistics/hassediagram/issues
+Imports: igraph, methods, MASS, grDevices, graphics, stats, showtext, sysfonts
 Depends: R (>= 3.5.0)
 Suggests: 
     dae,
     knitr,
     rmarkdown,
-    showtext,
-    sysfonts
+    kableExtra
 LazyData: true
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
