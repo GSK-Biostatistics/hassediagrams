@@ -163,9 +163,19 @@ The randomisation arrows that illustrate the randomisation performed can be incl
 
 The \code{\link[hassediagram]{hasserls}} function evaluates the design in order to identify if there are any 
 confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs, 
-due to the potential high computational cost. This can be controlled using the \code{check.confound.df = "N"} option.
+due to the potential high computational cost. This can be controlled using the \code{check.confound.df = "N"} option. 
+
+Objects that contain Unicode characters, e.g., u2192 or u2297 must be handled by Unicode friendly font families. Common font families that work with Unicode characters are: 
+for Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, and 
+for macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.
+The aforementioned fonts may not not be available in your R session. The available system fonts can be printed by systemfonts::system_fonts().
+System available fonts can be imported by running showtext::font_import() or extrafont::font_import().
+To check which fonts have been successfully imported, run showtext::fonts() or extrafont::fonts().
+The Arial Unicode MS font can be downloaded from online sources.
+The Noto Sans Math font can be installed using sysfonts::font_add_google("Noto Sans Math").
 }
 \examples{
+\dontrun{
 ## Examples using the package build-in data concrete, dental, human, analytical.
 
 ## In some of the examples, we use encoding "u2297" to print the tensor product symbol
@@ -185,7 +195,7 @@ concrete_rls[27,2] <- c("AC^AG^CC^CoT^CuT \u2192 Run")
 
 hasserls(object=concrete_objects, randomisation.objects=concrete_rls, 
          larger.fontlabelmultiplier=1.6, smaller.fontlabelmultiplier=1.3,
-         table.out="Y", arrow.pos=8, hasse.font="noto")
+         table.out="Y", arrow.pos=8, hasse.font="Cambria")
 
 
 ## A crossover design for a dental study
@@ -204,7 +214,7 @@ dental_rls[c(1:5,7,8), 2] <- c("Mean", "Period", "Sequence",
 hasserls(object=dental_objects, randomisation.objects=dental_rls, 
          random.arrows=dental_rand_arrows, larger.fontlabelmultiplier=1.6,
          table.out="Y", equation.out="Y", arrow.pos=15,
-         hasse.font="noto")
+         hasse.font="Embrima")
 
 
 ## A block design for an experiment assessing human-computer interaction
@@ -228,7 +238,7 @@ human_rls[, 2] <- c("Mean", "Day", "Method", "Period", "Room", "Sequence",
 hasserls(object=human_objects, randomisation.objects=human_rls, 
          random.arrows=human_rand_arrows, 
          larger.fontlabelmultiplier=1.4,
-         hasse.font="noto")
+         hasse.font="AppleMyungjo")
          
          
 ## A cross-nested design for an analytical method investigation
@@ -256,8 +266,7 @@ analytical_rls[,2] <- c("Mean", "Batch", "Site",
 hasserls(object=analytical_objects, randomisation.objects=analytical_rls, 
          random.arrows=analytical_rand_arrows, showpartialRLS="N", 
          check.confound.df="N", larger.fontlabelmultiplier=1, 
-         smaller.fontlabelmultiplier=1.6,
-         hasse.font="noto")
+         smaller.fontlabelmultiplier=1.6, hasse.font="Segoe UI Symbol")
 
 
 
@@ -304,7 +313,7 @@ if (requireNamespace("dae", quietly = TRUE)) {
   hasserls(object=Fac4Proc_objects, randomisation.objects=Fac4Proc_rls, 
            showpartialRLS="N", table.out="Y", 
            smaller.fontlabelmultiplier = 2,
-           hasse.font="noto")
+           hasse.font="Noto Sans Math")
 
 
   ## Data for an experiment with rows and columns from p.144 of 
@@ -340,13 +349,13 @@ if (requireNamespace("dae", quietly = TRUE)) {
            random.arrows=Casuarina_rand_arrows, 
            check.confound.df="N", showpartialRLS="N", 
            arrow.pos=10, smaller.fontlabelmultiplier=1.5,
-           hasse.font="noto")
+           hasse.font="Arial Unicode MS")
   
 } else {
   message("Examples using data from the 'dae' package 
   require 'dae' to be installed.")
 }
-
+}
 
 }
 \references{

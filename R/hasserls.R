@@ -101,6 +101,15 @@
 #' confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs, 
 #' due to the potential high computational cost. This can be controlled using the \code{check.confound.df = "N"} option. 
 #' 
+#' Objects that contain Unicode characters, e.g., u2192 or u2297 must be handled by Unicode friendly font families. Common font families that work with Unicode characters are: 
+#' for Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, and 
+#' for macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.
+#' The aforementioned fonts may not not be available in your R session. The available system fonts can be printed by systemfonts::system_fonts().
+#' System available fonts can be imported by running showtext::font_import() or extrafont::font_import().
+#' To check which fonts have been successfully imported, run showtext::fonts() or extrafont::fonts().
+#' The Arial Unicode MS font can be downloaded from online sources.
+#' The Noto Sans Math font can be installed using sysfonts::font_add_google("Noto Sans Math").
+#' 
 #' @author
 #' Damianos Michaelides, Simon Bate, and Marion Chatfield
 #'
@@ -120,6 +129,7 @@
 #' @importFrom stats anova aov as.formula model.matrix.default
 #' 
 #' @examples
+#' \dontrun{
 #' ## Examples using the package build-in data concrete, dental, human, analytical.
 #' 
 #' ## In some of the examples, we use encoding "u2297" to print the tensor product symbol
@@ -139,7 +149,7 @@
 #' 
 #' hasserls(object=concrete_objects, randomisation.objects=concrete_rls, 
 #'          larger.fontlabelmultiplier=1.6, smaller.fontlabelmultiplier=1.3,
-#'          table.out="Y", arrow.pos=8, hasse.font="noto")
+#'          table.out="Y", arrow.pos=8, hasse.font="Cambria")
 #' 
 #' 
 #' ## A crossover design for a dental study
@@ -158,7 +168,7 @@
 #' hasserls(object=dental_objects, randomisation.objects=dental_rls, 
 #'          random.arrows=dental_rand_arrows, larger.fontlabelmultiplier=1.6,
 #'          table.out="Y", equation.out="Y", arrow.pos=15,
-#'          hasse.font="noto")
+#'          hasse.font="Embrima")
 #' 
 #' 
 #' ## A block design for an experiment assessing human-computer interaction
@@ -182,7 +192,7 @@
 #' hasserls(object=human_objects, randomisation.objects=human_rls, 
 #'          random.arrows=human_rand_arrows, 
 #'          larger.fontlabelmultiplier=1.4,
-#'          hasse.font="noto")
+#'          hasse.font="AppleMyungjo")
 #'          
 #'          
 #' ## A cross-nested design for an analytical method investigation
@@ -210,8 +220,7 @@
 #' hasserls(object=analytical_objects, randomisation.objects=analytical_rls, 
 #'          random.arrows=analytical_rand_arrows, showpartialRLS="N", 
 #'          check.confound.df="N", larger.fontlabelmultiplier=1, 
-#'          smaller.fontlabelmultiplier=1.6,
-#'          hasse.font="noto")
+#'          smaller.fontlabelmultiplier=1.6, hasse.font="Segoe UI Symbol")
 #' 
 #' 
 #' 
@@ -258,7 +267,7 @@
 #'   hasserls(object=Fac4Proc_objects, randomisation.objects=Fac4Proc_rls, 
 #'            showpartialRLS="N", table.out="Y", 
 #'            smaller.fontlabelmultiplier = 2,
-#'            hasse.font="noto")
+#'            hasse.font="Noto Sans Math")
 #' 
 #' 
 #'   ## Data for an experiment with rows and columns from p.144 of 
@@ -295,13 +304,13 @@
 #'            random.arrows=Casuarina_rand_arrows, 
 #'            check.confound.df="N", showpartialRLS="N", 
 #'            arrow.pos=10, smaller.fontlabelmultiplier=1.5,
-#'            hasse.font="noto")
+#'            hasse.font="Arial Unicode MS")
 #'   
 #' } else {
 #'   message("Examples using data from the 'dae' package 
 #'   require 'dae' to be installed.")
 #' }
-#' 
+#' }
 #' 
 
 hasserls <- function(object,
@@ -335,27 +344,18 @@ hasserls <- function(object,
   
   contains_symbols <- grepl("\u2297", randomisation.objects, fixed = TRUE) | grepl("\u2192", randomisation.objects, fixed = TRUE)
   
-  if (any(contains_symbols==TRUE) & !identical(hasse.font, "noto")) {
-    warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to 'noto' which can handle Unicode characters, \notherwise the Hasse diagram may be misleading. \nThe font family is set to 'noto' automatically.")
-    hasse.font <- "noto"
+  # unic_fonts <- c("Cambria", "Embrima", "Segoe UI Symbol", "Arial Unicode MS", 
+  #                 "AppleMyungjo", ."SF Compact Rounded", ".SF Compact", 
+  #                 ".SF NS Rounded", "Noto Sans Math")
+  
+  if (any(contains_symbols==TRUE)) {
+    #fonts <- systemfonts::system_fonts()
+    #fontlist <- unic_fonts[unic_fonts %in% fonts]
+    warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to a Unicode friendly font family, \notherwise the Hasse diagram may be misleading, i.e., squares or question marks instead of the requested Unicode symbols. \nFor more details on Unicode friendly family options see the Details section in the documentation.")
   }
   
-  # if (any(contains_symbols==TRUE & !(hasse.font %in% "noto") )) {
-  #   warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to a font which can handle Unicode characters, \notherwise the Hasse diagram may be misleading with squares or ? instead of the requested Unicode characters.\nTo import such fonts, please run: showtext::font_import() and to see the available fonts run: showtext::fonts(). \nCommonly used fonts that handle Unicode characters are: \nfor Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, \nfor macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.\nIf your specified font in hasse.font is not currently available in showtext::fonts(), hasse.font is set to sans for execution with no errors, but Unicode characters will not render successfully.")
-  #   hasse.font <- "noto"
-  # }
   
-  if (!(hasse.font %in% c("sans", "serif", "mono", "noto"))) {
-    warning("hasse.font is safe to be used for 'sans', 'serif', 'mono', and 'noto' fonts. \nYour selected font is not in that list, which may lead to potential errors.")
-  }
-  
-  # if (!hasse.font %in% showtext::fonts()) {
-  #   warning("The font selected in hasse.font is not available in your system fonts that can be seen via showtext::fonts(). \n The font family is set to sans automatically, but this may lead to misleading diagrams if Unicode characters are included in your labels.")
-  #   hasse.font <- "sans"
-  # }
-  
-  
-  if (showpartialRLS=="Y" || showdfRLS=="Y"|| showrandRLS=="Y") showRLS<-"Y"
+  if (showpartialRLS=="Y" || showdfRLS=="Y"|| showrandRLS=="Y") showRLS <- "Y"
   
   if(is.null(outdir)) {
     data.folder.location <- getwd()

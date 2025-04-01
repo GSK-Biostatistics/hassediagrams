@@ -15,7 +15,7 @@
 #' @param pdf logical. If "Y" then a pdf file containing the Hasse diagram of the layout structure is generated. The default is "N", i.e., a pdf file is not generated.
 #' @param example File name for the pdf output file containing the Hasse diagram. The default is set to "example".
 #' @param outdir Location of the pdf output file if \code{pdf="Y"}. The default is set to \code{NULL} and in this case the pdf output file containing the Hasse diagram will be stored in the working directory of the user's R session.
-#' @param hasse.font The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagram]{hasserls}, the "noto" font family should be selected. The default is "sans".
+#' @param hasse.font The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagram]{hasserls}, a Unicode friendly font family should be selected. For more details on Unicode friendly family options see the Details section in the \link[hassediagram]{hasserls} documentation. The default is "sans".
 #' @param produceBWPlot logical. If "Y" then the Hasse diagram will be generated in black and white format. The default is set to "N", i.e., a coloured version of the plot is produced.
 #' @param structural.colour The colour of the structural lines that connect structural objects on the Hasse diagram. The default colour is "grey".
 #' @param structural.width The width of the structural lines on the Hasse diagram. The default width is 2.
@@ -167,8 +167,8 @@ hasselayout <- function(datadesign,
                         middle.fontlabelmultiplier = 1,   
                         smaller.fontlabelmultiplier = 1) {
   
-  if (!(hasse.font %in% c("sans", "serif", "mono", "noto"))) {
-    warning("hasse.font is safe to be used for 'sans', 'serif', 'mono', and 'noto' fonts. \nYour selected font is not in that list, which may lead to potential errors.")
+  if (!(hasse.font %in% c("sans", "serif", "mono"))) {
+    warning("hasse.font is safe to be used for 'sans', 'serif', and 'mono'. \nYour selected font is not in that list, which may lead to potential errors.")
   }
   
   if (showpartialLS=="Y" || showdfLS=="Y") showLS<-"Y"
