@@ -772,7 +772,7 @@ hasselayout <- function(datadesign,
     dscoords <- dscoords.fun("LS", finaleffects, ceffects.table.final.brief, larger.fontlabelmultiplier, smaller.fontlabelmultiplier, middle.fontlabelmultiplier)  
     g$layout <- dscoords$coords
     
-    vertex.label.family <- hasse.font  
+    font_used <- hasse.font  
     vertex.label.font <- rep(2,length(colnames(adjm.reverse)))
     vertex.label.color.objects <- c(rep(objects.colour,length(colnames(adjm.reverse))-3),"transparent",objects.colour,"transparent")
     vertex.label.color.black <- c(rep("black",length(colnames(adjm.reverse))-3),"transparent","black","transparent")
@@ -801,7 +801,14 @@ hasselayout <- function(datadesign,
     edge.color[g2a.edges %in% node.dumg]<-"transparent"
     par(mar=c((2*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.8, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4, 0.2, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4)) 
     
-    plot(g2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size,vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.6, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=vertex.label.family)
+    tryCatch({
+      plot(g2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size,vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.6, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=font_used)
+    }, error = function(e) {
+      message("The font selected in hasse.font is not available in the system's fonts and rendering failed. See the Details section for more information on fonts. The hasse.font is set to 'sans' instead.")
+      font_used <<- "sans"
+      plot(g2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size,vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.6, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=font_used)
+    })
+    
     
     if (showpartialLS=="Y") {
       adjm3 <- matrix(0,nrow=nrow(adjm),ncol=ncol(adjm),dimnames=dimnames(adjm))
@@ -832,10 +839,10 @@ hasselayout <- function(datadesign,
       
       g3$layout <- dscoords$coords
       
-      plot(g3, asp=FALSE, add=TRUE, vertex.label.color="transparent",vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent",  edge.label.color=Colourred, edge.label.font=2, edge.color=partial.colour,edge.lty=dottedline, edge.width = partial.width, vertex.label.family=vertex.label.family)
+      plot(g3, asp=FALSE, add=TRUE, vertex.label.color="transparent",vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent",  edge.label.color=Colourred, edge.label.font=2, edge.color=partial.colour,edge.lty=dottedline, edge.width = partial.width, vertex.label.family=font_used)
     }
     
-    plot(g, asp=FALSE, add=T,vertex.label.color=vertex.label.color.objects, vertex.label.cex=dscoords$textlabel.size,vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=vertex.label.family)
+    plot(g, asp=FALSE, add=T,vertex.label.color=vertex.label.color.objects, vertex.label.cex=dscoords$textlabel.size,vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=font_used)
   }
   
   if (showdfLS=="Y") {
@@ -843,7 +850,7 @@ hasselayout <- function(datadesign,
     g4 <- g
     
     V(g4)$label <- paste(sep="", "[",LS.output$xdfs.reverse[ ,3],LS.output$maxlevelsf.reverse[ ],",",LS.output$xdfs.reverse[ ,4],"]")
-    plot(g4, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=(1*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*1,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=vertex.label.family)
+    plot(g4, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=(1*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*1,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=font_used)
     LS.output$xdfs
   }
   

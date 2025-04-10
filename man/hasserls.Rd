@@ -87,11 +87,12 @@ The default is "N", i.e., a pdf file is not generated.}
 containing the Hasse diagram will be stored in the working directory of the user's R session (current working directory).}
 
 \item{hasse.font}{character. The name of the font family used for all text included on the Hasse diagram. 
-Standard and safe font families to choose are "sans", "serif", "mono" and "noto". 
+Standard and safe font families to choose are "sans", "serif", and "mono". 
 If any of the labels of the randomisation objects (as defined in the second column of \code{randomisation.objects} matrix) 
-contain Unicode characters, the "noto" font family should be selected. 
-If there are Unicode characters and the \code{hasse.font} is not set to "noto", this is changed automatically and a warning is given. 
-Alternative fonts can also be used, but this may lead to potential errors. The default is "sans".}
+contain Unicode characters, a Unicode friendly font family should be selected. 
+For more details on Unicode friendly family options see the Details section. 
+If the font family selected fails to render, the font is automatically changed to "sans" instead.
+The default is "sans".}
 
 \item{produceBWPlot}{logical. If "Y" then the Hasse diagram will be generated in black and white format. 
 The default is set to "N", i.e., a coloured version of the plot is produced.}
@@ -168,7 +169,7 @@ due to the potential high computational cost. This can be controlled using the \
 Objects that contain Unicode characters, e.g., u2192 or u2297 must be handled by Unicode friendly font families. Common font families that work with Unicode characters are: 
 for Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, and 
 for macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.
-The aforementioned fonts may not not be available in your R session. The available system fonts can be printed by systemfonts::system_fonts().
+The aforementioned fonts may not not be available in your R session. The available system fonts can be printed by systemfonts::system_fonts()$family.
 System available fonts can be imported by running showtext::font_import() or extrafont::font_import().
 To check which fonts have been successfully imported, run showtext::fonts() or extrafont::fonts().
 The Arial Unicode MS font can be downloaded from online sources.
@@ -176,10 +177,12 @@ The Noto Sans Math font can be installed using sysfonts::font_add_google("Noto S
 }
 \examples{
 \dontrun{
+#' ## In some of the examples, we use encoding "u2297" to print the tensor product symbol
+## and "u2192" to print a right arrow symbol. See the Details section and the hasse.font
+argument in the documentation to find out about fonts that are Unicode friendly.
+
 ## Examples using the package build-in data concrete, dental, human, analytical.
 
-## In some of the examples, we use encoding "u2297" to print the tensor product symbol
-## and "u2192" to print a right arrow symbol. 
 
 ## A fractional factorial design for investigating asphalt concrete production
 
