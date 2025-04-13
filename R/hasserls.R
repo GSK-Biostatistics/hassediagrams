@@ -40,11 +40,12 @@
 #' @param outdir character. Location of the pdf output file if \code{pdf="Y"}. The default is set to \code{NULL} and in this case the pdf output file 
 #' containing the Hasse diagram will be stored in the working directory of the user's R session (current working directory).
 #' @param hasse.font character. The name of the font family used for all text included on the Hasse diagram. 
-#' Standard and safe font families to choose are "sans", "serif", "mono" and "noto". 
+#' Standard and safe font families to choose are "sans", "serif", and "mono". 
 #' If any of the labels of the randomisation objects (as defined in the second column of \code{randomisation.objects} matrix) 
-#' contain Unicode characters, the "noto" font family should be selected. 
-#' If there are Unicode characters and the \code{hasse.font} is not set to "noto", this is changed automatically and a warning is given. 
-#' Alternative fonts can also be used, but this may lead to potential errors. The default is "sans".
+#' contain Unicode characters, a Unicode friendly font family should be selected. 
+#' For more details on Unicode friendly family options see the Details section. 
+#' If the font family selected fails to render, the font is automatically changed to "sans" instead.
+#' The default is "sans".
 #' @param produceBWPlot logical. If "Y" then the Hasse diagram will be generated in black and white format. 
 #' The default is set to "N", i.e., a coloured version of the plot is produced.
 #' @param structural.colour character. The colour of the structural lines that connect randomisation objects on the Hasse diagram. The default colour is "grey".
@@ -101,6 +102,15 @@
 #' confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs, 
 #' due to the potential high computational cost. This can be controlled using the \code{check.confound.df = "N"} option. 
 #' 
+#' Objects that contain Unicode characters, e.g., u2192 or u2297 must be handled by Unicode friendly font families. Common font families that work with Unicode characters are: 
+#' for Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, and 
+#' for macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.
+#' The aforementioned fonts may not not be available in your R session. The available system fonts can be printed by systemfonts::system_fonts()$family.
+#' System available fonts can be imported by running showtext::font_import() or extrafont::font_import().
+#' To check which fonts have been successfully imported, run showtext::fonts() or extrafont::fonts().
+#' The Arial Unicode MS font can be downloaded from online sources.
+#' The Noto Sans Math font can be installed using sysfonts::font_add_google("Noto Sans Math").
+#' 
 #' @author
 #' Damianos Michaelides, Simon Bate, and Marion Chatfield
 #'
@@ -120,10 +130,13 @@
 #' @importFrom stats anova aov as.formula model.matrix.default
 #' 
 #' @examples
+#' \dontrun{
+#' #' ## In some of the examples, we use encoding "u2297" to print the tensor product symbol
+#' ## and "u2192" to print a right arrow symbol. See the Details section and the hasse.font
+#' argument in the documentation to find out about fonts that are Unicode friendly.
+#' 
 #' ## Examples using the package build-in data concrete, dental, human, analytical.
 #' 
-#' ## In some of the examples, we use encoding "u2297" to print the tensor product symbol
-#' ## and "u2192" to print a right arrow symbol. 
 #' 
 #' ## A fractional factorial design for investigating asphalt concrete production
 #' 
@@ -139,7 +152,7 @@
 #' 
 #' hasserls(object=concrete_objects, randomisation.objects=concrete_rls, 
 #'          larger.fontlabelmultiplier=1.6, smaller.fontlabelmultiplier=1.3,
-#'          table.out="Y", arrow.pos=8, hasse.font="noto")
+#'          table.out="Y", arrow.pos=8, hasse.font="Cambria")
 #' 
 #' 
 #' ## A crossover design for a dental study
@@ -158,7 +171,7 @@
 #' hasserls(object=dental_objects, randomisation.objects=dental_rls, 
 #'          random.arrows=dental_rand_arrows, larger.fontlabelmultiplier=1.6,
 #'          table.out="Y", equation.out="Y", arrow.pos=15,
-#'          hasse.font="noto")
+#'          hasse.font="Embrima")
 #' 
 #' 
 #' ## A block design for an experiment assessing human-computer interaction
@@ -182,7 +195,7 @@
 #' hasserls(object=human_objects, randomisation.objects=human_rls, 
 #'          random.arrows=human_rand_arrows, 
 #'          larger.fontlabelmultiplier=1.4,
-#'          hasse.font="noto")
+#'          hasse.font="AppleMyungjo")
 #'          
 #'          
 #' ## A cross-nested design for an analytical method investigation
@@ -210,8 +223,7 @@
 #' hasserls(object=analytical_objects, randomisation.objects=analytical_rls, 
 #'          random.arrows=analytical_rand_arrows, showpartialRLS="N", 
 #'          check.confound.df="N", larger.fontlabelmultiplier=1, 
-#'          smaller.fontlabelmultiplier=1.6,
-#'          hasse.font="noto")
+#'          smaller.fontlabelmultiplier=1.6, hasse.font="Segoe UI Symbol")
 #' 
 #' 
 #' 
@@ -258,7 +270,7 @@
 #'   hasserls(object=Fac4Proc_objects, randomisation.objects=Fac4Proc_rls, 
 #'            showpartialRLS="N", table.out="Y", 
 #'            smaller.fontlabelmultiplier = 2,
-#'            hasse.font="noto")
+#'            hasse.font="Noto Sans Math")
 #' 
 #' 
 #'   ## Data for an experiment with rows and columns from p.144 of 
@@ -295,13 +307,13 @@
 #'            random.arrows=Casuarina_rand_arrows, 
 #'            check.confound.df="N", showpartialRLS="N", 
 #'            arrow.pos=10, smaller.fontlabelmultiplier=1.5,
-#'            hasse.font="noto")
+#'            hasse.font="Arial Unicode MS")
 #'   
 #' } else {
 #'   message("Examples using data from the 'dae' package 
 #'   require 'dae' to be installed.")
 #' }
-#' 
+#' }
 #' 
 
 hasserls <- function(object,
@@ -335,27 +347,14 @@ hasserls <- function(object,
   
   contains_symbols <- grepl("\u2297", randomisation.objects, fixed = TRUE) | grepl("\u2192", randomisation.objects, fixed = TRUE)
   
-  if (any(contains_symbols==TRUE) & !identical(hasse.font, "noto")) {
-    warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to 'noto' which can handle Unicode characters, \notherwise the Hasse diagram may be misleading. \nThe font family is set to 'noto' automatically.")
-    hasse.font <- "noto"
+  if (any(contains_symbols==TRUE)) {
+    #fonts <- systemfonts::system_fonts()
+    #fontlist <- unic_fonts[unic_fonts %in% fonts]
+    warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to a Unicode friendly font family, \notherwise the Hasse diagram may be misleading, i.e., squares or question marks instead of the requested Unicode symbols. \nFor more details on Unicode friendly family options see the Details section in the documentation.")
   }
   
-  # if (any(contains_symbols==TRUE & !(hasse.font %in% "noto") )) {
-  #   warning("The randomisation.objects argument contains Unicode characters, either '\u2297' or '\u2192'. \nThe hasse.font argument must be set to a font which can handle Unicode characters, \notherwise the Hasse diagram may be misleading with squares or ? instead of the requested Unicode characters.\nTo import such fonts, please run: showtext::font_import() and to see the available fonts run: showtext::fonts(). \nCommonly used fonts that handle Unicode characters are: \nfor Windows: Cambria, Embrima, Segoe UI Symbol, Arial Unicode MS, \nfor macOS: AppleMyungjo, .SF Compact Rounded, Arial Unicode MS, .SF Compact, .SF NS Rounded.\nIf your specified font in hasse.font is not currently available in showtext::fonts(), hasse.font is set to sans for execution with no errors, but Unicode characters will not render successfully.")
-  #   hasse.font <- "noto"
-  # }
   
-  if (!(hasse.font %in% c("sans", "serif", "mono", "noto"))) {
-    warning("hasse.font is safe to be used for 'sans', 'serif', 'mono', and 'noto' fonts. \nYour selected font is not in that list, which may lead to potential errors.")
-  }
-  
-  # if (!hasse.font %in% showtext::fonts()) {
-  #   warning("The font selected in hasse.font is not available in your system fonts that can be seen via showtext::fonts(). \n The font family is set to sans automatically, but this may lead to misleading diagrams if Unicode characters are included in your labels.")
-  #   hasse.font <- "sans"
-  # }
-  
-  
-  if (showpartialRLS=="Y" || showdfRLS=="Y"|| showrandRLS=="Y") showRLS<-"Y"
+  if (showpartialRLS=="Y" || showdfRLS=="Y"|| showrandRLS=="Y") showRLS <- "Y"
   
   if(is.null(outdir)) {
     data.folder.location <- getwd()
@@ -611,7 +610,7 @@ hasserls <- function(object,
                              larger.fontlabelmultiplier, smaller.fontlabelmultiplier, middle.fontlabelmultiplier)  
     fg$layout <- dscoords$coords
     
-    vertex.label.family <- hasse.font  
+    font_used <- hasse.font
     vertex.label.font <- rep(2,length(colnames(fadjm.reverse)))
     vertex.label.color.objects <- c(rep(objects.colour,length(colnames(fadjm.reverse))-3),"transparent",objects.colour,"transparent")
     vertex.label.color.black <- c(rep("black",length(colnames(fadjm.reverse))-3),"transparent","black","transparent")
@@ -637,17 +636,20 @@ hasserls <- function(object,
     fg2a <- simplify(fg2)
     V(fg2a)$label <- V(fg2a)$name
     fg2a$layout <- dscoords$coords
-    vcount(fg2a) #nodes  This used to be fg2a[[1]] as per print.default(fg2a)
-    fg2a.edges <- get.edges(fg2a,1:ecount(fg2a))[ ,1]-1   #lines joining  4,5,6  This used to be fg2a[[3]] as per print.default(fg2a)
-    node.dumg <- c(vcount(fg2a)-3,vcount(fg2a)-1)   #This is the numbers for the dummy nodes I think
+    vcount(fg2a) 
+    fg2a.edges <- get.edges(fg2a,1:ecount(fg2a))[ ,1]-1   
+    node.dumg <- c(vcount(fg2a)-3,vcount(fg2a)-1) 
     edge.color<-rep(structural.colour,length(fg2a.edges))
     edge.color[fg2a.edges %in% node.dumg]<-"transparent"
     par(mar=c((2*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.8, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4, 0.2, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4))     
-    #Places white edged transparent vertex circles, underlining for random effects and draws lines
-    plot(fg2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.4, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=vertex.label.family)
-    
-    
-    
+
+    tryCatch({
+      plot(fg2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.4, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=font_used)
+    }, error = function(e) {
+      message("The font selected in hasse.font is not available in the system's fonts and rendering failed. See the Details section for more information on fonts. The hasse.font is set to 'sans' instead.")
+      font_used <<- "sans"
+      plot(fg2a, asp=FALSE, add=F,vertex.label.color=vertex.label.color.black, vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=0.4, vertex.size=5, vertex.color="transparent", vertex.shape="circle", vertex.frame.color="white", edge.color=edge.color, edge.width = edgewidth, vertex.label.family=font_used)
+    })
     
     
     #-----------------------------------------------------------------------------------------------------------    
@@ -688,14 +690,14 @@ hasserls <- function(object,
       
       par(mar=c((2*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.8, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4, 0.2, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4))     
       
-      plot(fg3, asp=FALSE, add=TRUE, vertex.label.color="transparent",vertex.label.cex=dscoords$textlabel.size, vertex.label.font=2, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent",  edge.label.color=Colourred, edge.label.font=2, edge.color=partial.colour, edge.lty=dottedline, edge.width = partial.width, vertex.label.family=vertex.label.family)
+      plot(fg3, asp=FALSE, add=TRUE, vertex.label.color="transparent",vertex.label.cex=dscoords$textlabel.size, vertex.label.font=2, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent",  edge.label.color=Colourred, edge.label.font=2, edge.color=partial.colour, edge.lty=dottedline, edge.width = partial.width, vertex.label.family=font_used)
       
     }
     
     #Adds names of effects
     par(mar=c((2*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.8, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4, 0.2, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4))     
     
-    plot(fg, asp=FALSE, add=T,vertex.label.color=vertex.label.color.objects, vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=vertex.label.family)
+    plot(fg, asp=FALSE, add=T,vertex.label.color=vertex.label.color.objects, vertex.label.cex=dscoords$textlabel.size, vertex.label.font=vertex.label.font, vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=font_used)
   }
 
 
@@ -729,8 +731,8 @@ hasserls <- function(object,
     #Add degrees of freedom
     par(mar=c((2*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.8, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4, 0.2, (5*(max(larger.fontlabelmultiplier,smaller.fontlabelmultiplier)-1)+1)*0.4))     
     
-    plot(fg4fix, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df,  vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=vertex.label.dist.df4fix,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=vertex.label.family)
-    plot(fg4rand, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=vertex.label.dist.df4rand,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=vertex.label.family)
+    plot(fg4fix, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df,  vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=vertex.label.dist.df4fix,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=font_used)
+    plot(fg4rand, asp=FALSE, add=T,vertex.label.color=vertex.label.color.df, vertex.label.cex=dscoords$textlabel.size.df, vertex.label.font=vertex.label.font, vertex.label.degree=pi/2, vertex.label.dist=vertex.label.dist.df4rand,vertex.size=0, vertex.color="transparent", vertex.frame.color="transparent", vertex.shape="circle", edge.lty=0, edge.width = edgewidth, vertex.label.family=font_used)
   }
 
   #-----------------------------------------------------------------------------------------------------------    
