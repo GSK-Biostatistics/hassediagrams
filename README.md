@@ -126,5 +126,5 @@ documentation.
 This package is in a stable state and will only be updated for bug
 fixes.
 
-For feedback or suggestions, or to report bugs, contact
+The person responsible for monitoring this package is Simon Bate
 <simon.t.bate@gsk.com>.
