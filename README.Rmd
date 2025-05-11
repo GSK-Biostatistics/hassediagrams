@@ -114,8 +114,4 @@ and for an introduction to the package implementation visit the documentation.
 
 This package is in a stable state and will only be updated for bug fixes.
 
-For feedback or suggestions, or to report bugs, contact <simon.t.bate@gsk.com>. 
-
-
-
-
+The person responsible for monitoring this package is Simon Bate <simon.t.bate@gsk.co

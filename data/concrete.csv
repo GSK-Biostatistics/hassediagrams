@@ -1,0 +1,17 @@
+﻿AG,CoT,AC,CC,CuT,Run
+Fine,300,7,Wrapped,45,1
+Fine,300,7,Unwrapped,72,2
+Fine,300,5,Wrapped,72,3
+Coarse,250,5,Unwrapped,45,4
+Fine,250,7,Unwrapped,45,5
+Coarse,300,5,Unwrapped,72,6
+Coarse,300,5,Wrapped,45,7
+Fine,250,5,Wrapped,45,8
+Fine,250,7,Wrapped,72,9
+Coarse,300,7,Wrapped,72,10
+Coarse,250,5,Wrapped,72,11
+Coarse,250,7,Wrapped,45,12
+Fine,250,5,Unwrapped,72,13
+Coarse,250,7,Unwrapped,72,14
+Fine,300,5,Unwrapped,45,15
+Coarse,300,7,Unwrapped,45,16
