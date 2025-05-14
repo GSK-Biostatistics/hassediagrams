@@ -8,9 +8,7 @@ Authors@R:
       person(given = "Simon", family = "Bate", role = c("aut"), email = 	"simon.t.bate@gsk.com"),
       person(given = "Marion", family = "Chatfield", role = "aut"))
 Maintainer: Damianos Michaelides <dm3g15@soton.ac.uk> and Simon Bate <simon.t.bate@gsk.com>
-Description: Returns a Hasse diagram of the 'layout structure' 
-	     or the 'restricted layout structure' of an experimental 
-	     design. 
+Description: Returns a Hasse diagram of the 'layout structure' <doi.org/10.1080/00224065.2016.11918173> or the 'restricted layout structure' <doi.org/10.1080/00224065.2016.11918174> of an experimental design. 
 License: GPL-2
 Encoding: UTF-8
 URL: https://github.com/GSK-Biostatistics/hassediagram
