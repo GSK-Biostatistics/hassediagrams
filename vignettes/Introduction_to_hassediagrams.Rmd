@@ -1,10 +1,10 @@
 ---
-title: "From the Experimental Design to a Mixed Model Using the `hassediagram` Package in R"
+title: "From the Experimental Design to a Mixed Model Using the `hassediagrams` Package in R"
 author: ""
 output: rmarkdown::html_vignette
 bibliography: refs.bib
 vignette: >
-  %\VignetteIndexEntry{From the Experimental Design to a Mixed Model Using the `hassediagram` Package in R}
+  %\VignetteIndexEntry{From the Experimental Design to a Mixed Model Using the `hassediagrams` Package in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 header-includes:
@@ -48,7 +48,7 @@ header-includes:
 
 In many areas of scientific research complex experimental designs are now routinely employed. Failing to correctly identify the structure of the experimental design can lead to incorrect model selection and misleading inferences. @bate2016a describe an eight-stage procedure that focuses attention on the relationship between the experimental material and the experimental design. Stages 1 to 5 of the procedure begin by identifying the underlying structure of the selected design, which generates a list of ‘*Structural objects*’ consisting of factors and generalised factors (that correspond to combinations of the levels of the factors). This list is summarised through the so-called ‘*Layout Structure*’ and highlights any potential weaknesses it may have. In Stages 6 to 7, the procedure uses the structure of the design (as summarised by the Layout Structure) in conjunction with the randomisation performed to define a set of ‘*randomisation objects*’ (which form the ‘*Restricted Layout Structure*’), see @bate2016b. The randomisation objects in the Restricted Layout Structure can then be used in Stage 8 to define the model terms that are included in a mixed model for the statistical analysis.
 
-The Layout and Restricted Layout structures can be visualised using a generalisation of the Hasse Diagram. These diagrams can be generated using the `hassediagram` package in `R`.
+The Layout and Restricted Layout structures can be visualised using a generalisation of the Hasse Diagram. These diagrams can be generated using the `hassediagrams` package in `R`.
 
 
 
@@ -168,7 +168,7 @@ Once the factors have been identified, the factor levels chosen and the Experime
 
 **S4(c)** A description of the nested, crossed and equivalent relationships between the factors, as exhibited in the experimental design.
 
-An algorithmic approach that can be used to generate the Layout Structure is described in Bate and Chatfield (2016a). The Layout Structure can be visualised using a generalisation of the Hasse Diagram and the `hassediagram` package can be used to generate the diagram in `R`, see below.
+An algorithmic approach that can be used to generate the Layout Structure is described in Bate and Chatfield (2016a). The Layout Structure can be visualised using a generalisation of the Hasse Diagram and the `hassediagrams` package can be used to generate the diagram in `R`, see below.
 
 ### **Stage 5. Assigning the levels and degrees of freedom**
 

@@ -53,7 +53,7 @@ hasselayout(
 
 \item{outdir}{Location of the pdf output file if \code{pdf="Y"}. The default is set to \code{NULL} and in this case the pdf output file containing the Hasse diagram will be stored in the working directory of the user's R session.}
 
-\item{hasse.font}{The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagram]{hasserls}, a Unicode friendly font family should be selected. For more details on Unicode friendly family options see the Details section in the \link[hassediagram]{hasserls} documentation. The default is "sans".}
+\item{hasse.font}{The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagrams]{hasserls}, a Unicode friendly font family should be selected. For more details on Unicode friendly family options see the Details section in the \link[hassediagrams]{hasserls} documentation. The default is "sans".}
 
 \item{produceBWPlot}{logical. If "Y" then the Hasse diagram will be generated in black and white format. The default is set to "N", i.e., a coloured version of the plot is produced.}
 
@@ -76,7 +76,7 @@ hasselayout(
 \item{smaller.fontlabelmultiplier}{The small font multiplier is the multiplier for the font used for the labels of objects on the Hasse diagram where there are five or more objects at that level of the diagram. The default is 1.}
 }
 \value{
-The function \code{\link[hassediagram]{hasselayout}} returns:
+The function \code{\link[hassediagrams]{hasselayout}} returns:
 
 1. The Hasse diagram of the layout structure (if \code{showLS="Y"}).
 
@@ -107,7 +107,7 @@ The maximum number of possible levels of each generalised factor, along with the
 
 Using the randomfacsid argument the factors that correspond to random effects can be highlighted by underlining them on the Hasse diagram. The vector should be equal to the number of variables/factors in the design and consist of fixed (entry = 0) or random (entry = 1) values.
 
-The \code{\link[hassediagram]{hasselayout}} function evaluates the design in order to identify if there are any confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs due to the potential high computational cost. This can be controlled using the check.confound.df = "N" option.
+The \code{\link[hassediagrams]{hasselayout}} function evaluates the design in order to identify if there are any confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs due to the potential high computational cost. This can be controlled using the check.confound.df = "N" option.
 }
 \examples{
 

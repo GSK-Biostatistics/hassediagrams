@@ -19,13 +19,13 @@
 \value{
 The functions return the structural objects of the Layout Structure 
 and a matrix that the users need to edit with the randomisation 
-objects to pass in the \code{\link[hassediagram]{hasserls}} function.
+objects to pass in the \code{\link[hassediagrams]{hasserls}} function.
 }
 \description{
 Print and Summary of objects of class \code{"rls"}.
 }
 \note{
-For examples see \code{\link[hassediagram]{itemlist}} and \code{\link[hassediagram]{hasserls}}.
+For examples see \code{\link[hassediagrams]{itemlist}} and \code{\link[hassediagrams]{hasserls}}.
 }
 \author{
 Damianos Michaelides, Simon Bate, and Marion Chatfield

@@ -2,16 +2,16 @@
 % Please edit documentation in R/hassediagram.R
 \docType{package}
 \encoding{UTF-8}
-\name{hassediagram}
-\alias{hassediagram}
+\name{hassediagrams}
+\alias{hassediagrams}
 \title{Hasse diagram of the layout structure and restricted layout structure}
 \description{
 Returns a Hasse diagram of the 'layout structure' or the 'restricted layout structure' 
 of an experimental design.
 }
 \details{
-The package consists of three main functions: \code{\link[hassediagram]{hasselayout}}, 
-\code{\link[hassediagram]{itemlist}}, and \code{\link[hassediagram]{hasserls}}. 
+The package consists of three main functions: \code{\link[hassediagrams]{hasselayout}}, 
+\code{\link[hassediagrams]{itemlist}}, and \code{\link[hassediagrams]{hasserls}}. 
 The first function generates the Hasse diagram of the layout structure of an experimental design. 
 The latter two functions are used together to generate the Hasse diagram of the restricted layout 
 structure of an experimental design.

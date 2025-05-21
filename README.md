@@ -1,11 +1,11 @@
-hassediagram: generates the layout structure and restricted layout
+hassediagrams: generates the layout structure and restricted layout
 structure of experimental designs
 ================
 Damianos Michaelides, Simon Bate, Marion Chatfield
 
 ## Overview
 
-The `hassediagram` package provides tools to visualize the **structure
+The `hassediagrams` package provides tools to visualize the **structure
 of experimental designs** using Hasse diagrams. The package determines
 the structure of the design, summarised by the layout structure, and
 uses this structure to generate a Hasse diagram. This diagram describes
@@ -53,20 +53,20 @@ that defines the randomisation arrows.
 
 ### Install from GitHub (Development Version)
 
-The development version of `hassediagram` can be installed with:
+The development version of `hassediagrams` can be installed with:
 
 ``` r
 # Install devtools (if not already installed)
 install.packages("devtools")
 
-# Install hassediagram from GitHub
-devtools::install_github("GSK-Biostatistics/hassediagram")
+# Install hassediagrams from GitHub
+devtools::install_github("GSK-Biostatistics/hassediagrams")
 ```
 
 ### Install from CRAN (when made available)
 
 ``` r
-install.packages("hassediagram")
+install.packages("hassediagrams")
 ```
 
 ## Usage
@@ -74,7 +74,7 @@ install.packages("hassediagram")
 Load the package:
 
 ``` r
-library(hassediagram)
+library(hassediagrams)
 ```
 
 ## Example: Generate Hasse Diagrams of the Layout Structure and Restricted Layout Structure
@@ -115,7 +115,7 @@ hasserls(object=concrete_objects, randomisation.objects=concrete_rls,
 For an introduction to the methodology, check the package vignette:
 
 ``` r
-vignette("Introduction_to_hassediagram")
+vignette("Introduction_to_hassediagrams")
 ```
 
 and for an introduction to the package implementation visit the

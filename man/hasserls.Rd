@@ -37,14 +37,14 @@ hasserls(
 )
 }
 \arguments{
-\item{object}{An object of class \code{"rls"}. The function \code{\link[hassediagram]{itemlist}} generates the class \code{"rls"} object. 
+\item{object}{An object of class \code{"rls"}. The function \code{\link[hassediagrams]{itemlist}} generates the class \code{"rls"} object. 
 Printing the "\code{"rls"} object will give a list of structural objects (that define the layout structure) to aid in 
 defining the randomisation objects in the restricted layout structure.}
 
 \item{randomisation.objects}{This argument takes the format of the \code{TransferObject} item from the class \code{"rls"} object. 
 The first column contains the names of all the structural objects in the layout structure (automatically generated) and the 
 second column contains the corresponding randomisation objects in the restricted layout structure (manually generated). 
-To begin with, the function \code{\link[hassediagram]{itemlist}} should be run to generate the class \code{"rls"} object. 
+To begin with, the function \code{\link[hassediagrams]{itemlist}} should be run to generate the class \code{"rls"} object. 
 The user will then need to edit the second column of the \code{TransferObject} matrix to define the randomisation objects 
 that appear in the restricted layout structure. Structural objects that do not occur in the restricted layout structure must be 
 left as "NULL" in the second column. The names specified in the second column represent the labels of the randomisation objects 
@@ -127,7 +127,7 @@ Hasse diagram involving a factor that is equivalent to a generalised factor. The
 Hasse diagram where there are five or more objects at that level of the diagram. The default is 1.}
 }
 \value{
-The function \code{\link[hassediagram]{hasserls}} returns:
+The function \code{\link[hassediagrams]{hasserls}} returns:
 1. The Hasse diagram of the restricted layout structure (if \code{showRLS = "Y"}).
 
 2. The restricted layout structure table shows the relationships between the randomisation objects in the restricted layout structure 
@@ -147,7 +147,7 @@ where the row and column headers include both factor (or generalised factor) nam
 Returns a Hasse diagram of the restricted layout structure of an experimental design
 }
 \details{
-The \code{\link[hassediagram]{hasserls}} function generates the Hasse diagram of the restricted layout structure. 
+The \code{\link[hassediagrams]{hasserls}} function generates the Hasse diagram of the restricted layout structure. 
 The Hasse diagram consists of a set of randomisation objects, corresponding to the factors and generalised factors, 
 and the relationships between the objects (either crossed, nested, partially crossed or equivalent), 
 as defined by the structure of the experimental design and the randomisation performed, see Bate and Chatfield (2016b).
@@ -162,7 +162,7 @@ and the "skeleton ANOVA" degrees of freedom, can be included in the randomisatio
 
 The randomisation arrows that illustrate the randomisation performed can be included on the Hasse diagram.
 
-The \code{\link[hassediagram]{hasserls}} function evaluates the design in order to identify if there are any 
+The \code{\link[hassediagrams]{hasserls}} function evaluates the design in order to identify if there are any 
 confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs, 
 due to the potential high computational cost. This can be controlled using the \code{check.confound.df = "N"} option. 
 

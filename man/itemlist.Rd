@@ -10,7 +10,7 @@ itemlist(datadesign, randomfacsid = NULL)
 \arguments{
 \item{datadesign}{A data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables/factors 
 in the experimental design. The dataframe should only include the variables/factors/columns that the user wants to evaluate in the 
-consecutive \code{\link[hassediagram]{hasserls}} function to generate the Hasse diagram of the restricted layout structure.}
+consecutive \code{\link[hassediagrams]{hasserls}} function to generate the Hasse diagram of the restricted layout structure.}
 
 \item{randomfacsid}{An optional vector specifying whether the factors are defined as fixed (entry = 0) or random (entry = 1). 
 The default choice is \code{NULL} and the function automatically sets all entries to 0. The length of the vector should be equal to the number of variables/factors in the design, i.e., the length of the vector should be equal to the number of columns of the argument \code{datadesign}.}
