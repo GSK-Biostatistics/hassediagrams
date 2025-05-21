@@ -6,8 +6,8 @@
 #' of an experimental design.
 #'
 #' @details
-#' The package consists of three main functions: \code{\link[hassediagram]{hasselayout}}, 
-#' \code{\link[hassediagram]{itemlist}}, and \code{\link[hassediagram]{hasserls}}. 
+#' The package consists of three main functions: \code{\link[hassediagrams]{hasselayout}}, 
+#' \code{\link[hassediagrams]{itemlist}}, and \code{\link[hassediagrams]{hasserls}}. 
 #' The first function generates the Hasse diagram of the layout structure of an experimental design. 
 #' The latter two functions are used together to generate the Hasse diagram of the restricted layout 
 #' structure of an experimental design.
@@ -39,6 +39,6 @@
 #' Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002), Experimental design and analysis  
 #' for tree improvement. 2nd edition. CSIRO, Melbourne, Australia.
 #'
-#' @name hassediagram
+#' @name hassediagrams
 #' @keywords internal
 "_PACKAGE"

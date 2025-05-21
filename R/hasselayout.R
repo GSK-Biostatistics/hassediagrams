@@ -15,7 +15,7 @@
 #' @param pdf logical. If "Y" then a pdf file containing the Hasse diagram of the layout structure is generated. The default is "N", i.e., a pdf file is not generated.
 #' @param example File name for the pdf output file containing the Hasse diagram. The default is set to "example".
 #' @param outdir Location of the pdf output file if \code{pdf="Y"}. The default is set to \code{NULL} and in this case the pdf output file containing the Hasse diagram will be stored in the working directory of the user's R session.
-#' @param hasse.font The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagram]{hasserls}, a Unicode friendly font family should be selected. For more details on Unicode friendly family options see the Details section in the \link[hassediagram]{hasserls} documentation. The default is "sans".
+#' @param hasse.font The name of the font family used for all text included in the Hasse diagram. Standard and safe font families to choose are "sans", "serif", and "mono". If the design's factor labels contain Unicode characters, or for consistency with Hasse diagrams of restricted layout structures using \link[hassediagrams]{hasserls}, a Unicode friendly font family should be selected. For more details on Unicode friendly family options see the Details section in the \link[hassediagrams]{hasserls} documentation. The default is "sans".
 #' @param produceBWPlot logical. If "Y" then the Hasse diagram will be generated in black and white format. The default is set to "N", i.e., a coloured version of the plot is produced.
 #' @param structural.colour The colour of the structural lines that connect structural objects on the Hasse diagram. The default colour is "grey".
 #' @param structural.width The width of the structural lines on the Hasse diagram. The default width is 2.
@@ -40,9 +40,9 @@
 #'
 #' Using the randomfacsid argument the factors that correspond to random effects can be highlighted by underlining them on the Hasse diagram. The vector should be equal to the number of variables/factors in the design and consist of fixed (entry = 0) or random (entry = 1) values.
 #'
-#' The \code{\link[hassediagram]{hasselayout}} function evaluates the design in order to identify if there are any confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs due to the potential high computational cost. This can be controlled using the check.confound.df = "N" option. 
+#' The \code{\link[hassediagrams]{hasselayout}} function evaluates the design in order to identify if there are any confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs due to the potential high computational cost. This can be controlled using the check.confound.df = "N" option. 
 #'
-#' @return The function \code{\link[hassediagram]{hasselayout}} returns:
+#' @return The function \code{\link[hassediagrams]{hasselayout}} returns:
 #'
 #' 1. The Hasse diagram of the layout structure (if \code{showLS="Y"}).
 #'
@@ -81,7 +81,7 @@
 #' @importFrom graphics par
 #' 
 #' @examples
-#' 
+#' \dontrun{
 #' ## Examples using the package build-in data concrete, dental, human, analytical.
 #' 
 #' ## A fractional factorial design for investigating asphalt concrete production
@@ -143,6 +143,8 @@
 #'   message("Examples using data from the 'dae' package 
 #'            require 'dae' to be installed.")
 #' }
+#' }
+#' 
 #' 
 hasselayout <- function(datadesign, 
                         randomfacsid = NULL,

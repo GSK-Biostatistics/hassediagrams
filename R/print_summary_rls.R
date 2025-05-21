@@ -10,9 +10,9 @@
 #'
 #' @return The functions return the structural objects of the Layout Structure 
 #' and a matrix that the users need to edit with the randomisation 
-#' objects to pass in the \code{\link[hassediagram]{hasserls}} function.
+#' objects to pass in the \code{\link[hassediagrams]{hasserls}} function.
 #'
-#' @note For examples see \code{\link[hassediagram]{itemlist}} and \code{\link[hassediagram]{hasserls}}.
+#' @note For examples see \code{\link[hassediagrams]{itemlist}} and \code{\link[hassediagrams]{hasserls}}.
 #'
 #' @author Damianos Michaelides, Simon Bate, and Marion Chatfield
 #'
