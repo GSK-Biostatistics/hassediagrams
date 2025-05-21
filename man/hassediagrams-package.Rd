@@ -4,9 +4,9 @@
 \encoding{UTF-8}
 \name{hassediagrams-package}
 \alias{hassediagrams-package}
-\title{hassediagrams: Hasse diagram of the layout structure and restricted layout structure}
+\title{hassediagrams: Hasse Diagram of the Layout Structure and Restricted Layout Structure}
 \description{
-Returns a Hasse diagram of the 'layout structure' <doi.org/10.1080/00224065.2016.11918173> or the 'restricted layout structure' <doi.org/10.1080/00224065.2016.11918174> of an experimental design.
+Returns a Hasse diagram of the 'layout structure' \doi{10.1080/00224065.2016.11918173} or the 'restricted layout structure' \doi{10.1080/00224065.2016.11918174} of an experimental design.
 }
 \seealso{
 Useful links:

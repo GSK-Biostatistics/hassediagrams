@@ -474,8 +474,7 @@ strip.order.biglm.fun <- function (x) {
 
 
 #' @noRd
-sort.effectorder.fun <- function(x) {
-  #zzz^change
+sort_effectorder_fun <- function(x) {
   splitmatrixformat <- suppressWarnings(do.call(rbind, strsplit(x, "\\^")))
   sorted.effects <- apply(t(apply(as.matrix(splitmatrixformat),1,sort)),1,unique)
   sortedx <- rep("",length(x))
@@ -764,7 +763,7 @@ dfs.fun <- function(DStype, noall, feffects, ceffects.table.fb, adjm, outputlist
             nonnested.rownames.tier.dfs[j] <- gsub("\\(","^",nonnested.rownames.tier.dfs[j])
             nonnested.rownames.tier.dfs[j] <- gsub("\\)","",nonnested.rownames.tier.dfs[j])
           }
-          tier.dfs[rownames(tier.dfs)[which(sort.effectorder.fun(nonnested.rownames.tier.dfs)%in% names(dropi))],i-1] <- dropi
+          tier.dfs[rownames(tier.dfs)[which(sort_effectorder_fun(nonnested.rownames.tier.dfs)%in% names(dropi))],i-1] <- dropi
         }
         
         #Puts column confoundedf = 0 if no confounded dfs, 1 if confounded dfs
@@ -787,7 +786,7 @@ dfs.fun <- function(DStype, noall, feffects, ceffects.table.fb, adjm, outputlist
             coliname <- paste("term",i,sep="")
             tier.dfs <- cbind(tier.dfs,rep(0,nrow(tier.dfs)))
             colnames(tier.dfs)[ncol(tier.dfs)]<-coliname
-            posterms <- sort.effectorder.fun(nonnested.rownames.tier.dfs[1:i])
+            posterms <- sort_effectorder_fun(nonnested.rownames.tier.dfs[1:i])
             modeli <- c("mean",posterms[c(xadjm[i+1,2:length(feffects[feffects<feffects[i+1]])]==1,T)])
             model.testi <- model.effects.fun(modeli)
             
@@ -811,7 +810,7 @@ dfs.fun <- function(DStype, noall, feffects, ceffects.table.fb, adjm, outputlist
             anovai.dfs[names(anovai.dfs) %in% names(anovai.df)] <- anovai.df
             anovai.dfs
             
-            tier.dfs[rownames(tier.dfs)[which(sort.effectorder.fun(nonnested.rownames.tier.dfs)%in% names(anovai.dfs))],ncol(tier.dfs)] <- anovai.dfs
+            tier.dfs[rownames(tier.dfs)[which(sort_effectorder_fun(nonnested.rownames.tier.dfs)%in% names(anovai.dfs))],ncol(tier.dfs)] <- anovai.dfs
             tier.dfs[i,length(tiers)+3] <- tier.dfs[i,ncol(tier.dfs)]
           }
         }

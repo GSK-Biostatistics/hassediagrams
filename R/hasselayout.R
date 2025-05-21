@@ -81,7 +81,7 @@
 #' @importFrom graphics par
 #' 
 #' @examples
-#' 
+#' \dontrun{
 #' ## Examples using the package build-in data concrete, dental, human, analytical.
 #' 
 #' ## A fractional factorial design for investigating asphalt concrete production
@@ -143,6 +143,8 @@
 #'   message("Examples using data from the 'dae' package 
 #'            require 'dae' to be installed.")
 #' }
+#' }
+#' 
 #' 
 hasselayout <- function(datadesign, 
                         randomfacsid = NULL,

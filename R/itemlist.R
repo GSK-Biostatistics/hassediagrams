@@ -52,6 +52,7 @@
 #' Williams, E.R., Matheson, A.C. and Harwood, C.E. (2002), Experimental design and analysis for tree improvement. 2nd edition. CSIRO, Melbourne, Australia.
 #'
 #' @examples
+#' \dontrun{
 #' # Examples using built-in data: concrete, dental, human, analytical
 #' 
 #' # Fractional factorial design for asphalt concrete production
@@ -78,6 +79,7 @@
 #'   BIBDWheat$Plots <- c(1:30)
 #'   BIBDWheat_objects <- itemlist(datadesign=BIBDWheat)
 #'   print(BIBDWheat_objects)
+#' }
 #' }
 #' 
 #' @export

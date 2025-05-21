@@ -110,7 +110,7 @@ Using the randomfacsid argument the factors that correspond to random effects ca
 The \code{\link[hassediagrams]{hasselayout}} function evaluates the design in order to identify if there are any confounded degrees of freedom across the design. It is not recommended to perform this evaluation for large designs due to the potential high computational cost. This can be controlled using the check.confound.df = "N" option.
 }
 \examples{
-
+\dontrun{
 ## Examples using the package build-in data concrete, dental, human, analytical.
 
 ## A fractional factorial design for investigating asphalt concrete production
@@ -172,6 +172,8 @@ if (requireNamespace("dae", quietly = TRUE)) {
   message("Examples using data from the 'dae' package 
            require 'dae' to be installed.")
 }
+}
+
 
 }
 \references{

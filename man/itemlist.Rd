@@ -47,6 +47,7 @@ The function requires a dataframe containing the variables corresponding to the 
 Using the \code{randomfacsid} argument, the factors and generalised factors that correspond to random effects can be identified.
 }
 \examples{
+\dontrun{
 # Examples using built-in data: concrete, dental, human, analytical
 
 # Fractional factorial design for asphalt concrete production
@@ -73,6 +74,7 @@ if (requireNamespace("dae", quietly = TRUE)) {
   BIBDWheat$Plots <- c(1:30)
   BIBDWheat_objects <- itemlist(datadesign=BIBDWheat)
   print(BIBDWheat_objects)
+}
 }
 
 }
