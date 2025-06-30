@@ -7,7 +7,7 @@ Authors@R:
     c(person(given = "Damianos", family = "Michaelides", role = c("aut", "cre"), email = 	"dm3g15@soton.ac.uk"),
       person(given = "Simon", family = "Bate", role = c("aut"), email = 	"simon.t.bate@gsk.com"),
       person(given = "Marion", family = "Chatfield", role = "aut"),
-      person("GlaxoSmithKline Research & Development Limited", role = c("cph", "fnd"))
+      person("GlaxoSmithKline Research & Development Limited", role = c("cph", "fnd")))
 Maintainer: Damianos Michaelides <dm3g15@soton.ac.uk>
 Description: Returns a Hasse diagram of the 'layout structure' <doi:10.1080/00224065.2016.11918173> or the 'restricted layout structure' <doi:10.1080/00224065.2016.11918174> of an experimental design. 
 License: GPL-2
